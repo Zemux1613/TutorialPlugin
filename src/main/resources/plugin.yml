@@ -1,0 +1,10 @@
+name: TutoriumPlugin
+version: '${project.version}'
+main: de.fhe.tutoriumplugin.TutoriumPlugin
+api-version: 1.19
+authors: [Tom, ist, cool]
+
+commands:
+  fly:
+    description: Du bist mächtig und kannst fliegen
+    aliases: [f]
