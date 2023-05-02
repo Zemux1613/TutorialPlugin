@@ -10,42 +10,33 @@ public class FlyCommand implements CommandExecutor {
 
   @Override
   public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-    if (commandSender instanceof Player) {
-      Player player = (Player) commandSender;
-
+    if (commandSender instanceof final Player player) {
       if (args.length == 1) {
-        String playername = args[0];
-        Player target = Bukkit.getPlayer(playername);
+        final String playerName = args[0];
+        final Player target = Bukkit.getPlayer(playerName);
         if (target == null) {
-          player.sendMessage("§e" + playername + " §cist offline.");
+          player.sendMessage("§e" + playerName + " §cist offline.");
           return true;
         }
-        if (target.getAllowFlight()) {
-          target.setAllowFlight(false);
-          target.setFlying(false);
-          target.sendMessage("§cDu darf jetzt nicht mehr fliegen!");
-        } else {
-          target.setAllowFlight(true);
-          target.setFlying(true);
-          target.sendMessage("§aDu darf jetzt fliegen!");
-        }
+        toggleFly(target);
         player.sendMessage(
-            "§aDu hast dem Spieler §e" + playername + " §aden Flugmodus " + (target.getAllowFlight()
+            "§aDu hast dem Spieler §e" + playerName + " §aden Flugmodus " + (target.getAllowFlight()
                 ? "§2aktiviert" : "§cdeaktiviert") + "§8.");
+      } else if (args.length == 0) {
+        toggleFly(player);
       } else {
-        if (player.getAllowFlight()) {
-          player.setAllowFlight(false);
-          player.setFlying(false);
-          player.sendMessage("§cDu darf jetzt nicht mehr fliegen!");
-        } else {
-          player.setAllowFlight(true);
-          player.setFlying(true);
-          player.sendMessage("§aDu darf jetzt fliegen!");
-        }
+        player.sendMessage("§7Bitte Verwende§8: /§cfly §8<§cSpielername§8>");
       }
     } else {
       commandSender.sendMessage("§4Du bist kein Spieler! Du darfst sowas nicht tun!");
     }
     return false;
+  }
+
+  private static void toggleFly(Player target) {
+    target.setAllowFlight(!target.getAllowFlight());
+    target.setFlying(target.getAllowFlight());
+    target.sendMessage("§7Der Flugmodus für dich wurde " + (target.getAllowFlight() ? "§aaktiviert"
+        : "§cdeaktiviert") + "§8.");
   }
 }
