@@ -8,3 +8,21 @@ commands:
   fly:
     description: Du bist mächtig und kannst fliegen
     aliases: [f]
+  clearchat:
+    description: Leere den Chat
+  clearinventory:
+    description: Leere dein Inventar
+  craft:
+    description: Öffne die Werkbank
+  enderchest:
+    description: Öffne die Endertruhe
+  feed:
+    description: Sättige dich
+  gm:
+    description: Ändere den Gamemode
+  heal:
+    description: Heile jemanden
+  kill:
+    description: Töte jemanden
+  speed:
+    description: Ändere den Speed von jemanden
